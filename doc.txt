@@ -1,0 +1,7 @@
+Node version: v20.11.1
+Npm version: 10.2.4
+
+Addditional libraries:
+
+npm i express ejs mongoose
+npm i passport passport-local passport-local-mongoose

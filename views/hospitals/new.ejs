@@ -1,0 +1,42 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row">
+    <h1 class="text-center"> New Hospital </h1>
+    <div class="col-6 offset-3">
+        <form action="/hospitals" method="POST" novalidate class="validated-form">
+            <div class="mb-3">
+                <label class="form-label" for="name">Name </label>
+                <input class="form-control" type="text" id="name" name="hospital[name]" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="location">Location </label>
+                <input class="form-control" type="text" id="location" name="hospital[location]" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="image"> Image </label>
+                <input class="form-control" type="text" id="image" name="hospital[image]" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="description">Description </label>
+                <textarea class="form-control" id="description" name="hospital[description]" required></textarea>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success">Add Hospital</button>
+            </div>
+        </form>
+        <a href="/hospitals">All Hospitals</a>
+    </div>
+</div>
+

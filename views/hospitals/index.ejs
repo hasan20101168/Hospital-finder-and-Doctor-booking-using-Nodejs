@@ -1,0 +1,27 @@
+<% layout('layouts/boilerplate') %>
+
+<h1>All hospitals</h1>
+<div>
+    <a href="/hospitals/new">Add Hospital</a>
+</div>
+<ul>
+<% for (let hospital of hospitals){ %>
+    <div class="card" mb-3>
+        <div class="row">
+            <div class="col-md-4">
+                <img class="img-fluid" alt="" src="/images/<%=hospital.image%>">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title"><%=hospital.name%></h5>
+                    <p class="card-text"><%=hospital.description%></p>
+                    <p class="card-text">
+                        <small class="text-muted"><%=hospital.location%></small>
+                    </p>
+                    <a class="btn btn-primary" href="/hospitals/<%=hospital._id%>">View <%=hospital.name%></a>
+                </div>
+            </div>
+        </div>
+    </div>
+<% } %>
+</ul>

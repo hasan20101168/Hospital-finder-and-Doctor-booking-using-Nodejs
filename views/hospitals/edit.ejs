@@ -1,0 +1,41 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row">
+    <h1 class="text-center"> Edit Hospital </h1>
+    <div class="col-6 offset-3">
+        <form action="/hospitals/<%=hospital._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+            <div class="mb-3">
+                <label class="form-label" for="name">Name </label>
+                <input class="form-control" type="text" id="name" name="hospital[name]" value="<%=hospital.name%>" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="location">Location </label>
+                <input class="form-control" type="text" id="location" name="hospital[location]" value="<%=hospital.location%>" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="image"> Image </label>
+                <input class="form-control" type="text" id="image" name="hospital[image]" value="<%=hospital.image%>" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="description">Description </label>
+                <textarea class="form-control" id="description" name="hospital[description]" required><%=hospital.description%></textarea>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-info">Update Hospital</button>
+            </div>
+        </form>
+        <a href="/hospitals/<%= hospital._id %>">Back</a>
+    </div>
+</div>
