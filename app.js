@@ -15,6 +15,7 @@ const ExpressError = require('./utils/ExpressError');
 const Hospital = require('./models/hospital');
 const User = require('./models/user');
 const userRoutes = require('./routes/users');
+const Review = require('./models/review');
 
 mongoose.connect('mongodb://127.0.0.1:27017/hospitalDB')
     .then(() => {
@@ -105,6 +106,15 @@ app.delete('/hospitals/:id', catchAsync(async (req, res) => {
     await Hospital.findByIdAndDelete(id);
     res.redirect('/hospitals');
 }));
+
+app.post('/hospitals/:id/reviews', catchAsync(async(req, res) => {
+    const hospital = await Hospital.findById(req.params.id);
+    const review = new Review(req.body.review);
+    hospital.reviews.push(review);
+    await review.save();
+    await hospital.save();
+    res.redirect(`/hospitals/${hospital._id}`);
+}))
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))
