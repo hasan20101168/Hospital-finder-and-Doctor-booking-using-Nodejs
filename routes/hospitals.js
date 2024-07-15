@@ -27,28 +27,39 @@ router.get('/new', (req, res) => {
 router.post('/', validateHospital, catchAsync(async (req, res, next) => {
     const hospital = new Hospital(req.body.hospital);
     await hospital.save();
-    res.redirect('/hospitals/new')
+    req.flash('success', 'Successfully added a new hospital');
+    res.redirect(`/hospitals/${hospital._id}`)
 }))
 
 router.get('/:id', catchAsync(async (req, res) => {
     const hospital = await Hospital.findById(req.params.id).populate('reviews');
+    if (!hospital){
+        req.flash('error', 'Cannot find the hospital!');
+        return res.redirect('/hospitals');
+    }
     res.render('hospitals/show', {hospital});
 }));
 
 router.get('/:id/edit', catchAsync(async (req, res) => {
     const hospital = await Hospital.findById(req.params.id)
+    if (!hospital){
+        req.flash('error', 'Cannot find the hospital!');
+        return res.redirect('/hospitals');
+    }
     res.render('hospitals/edit', {hospital});
 }));
 
 router.put('/:id', validateHospital,catchAsync(async (req, res) => {
     const {id} = req.params;
     const hospital = await Hospital.findByIdAndUpdate(id, {...req.body.hospital});
+    req.flash('success', 'Successfully updated hospital!');
     res.redirect(`/hospitals/${hospital._id}`);
 }));
 
 router.delete('/:id', catchAsync(async (req, res) => {
     const {id} = req.params;
     await Hospital.findByIdAndDelete(id);
+    req.flash('success', 'Successfully deleted hospital!');
     res.redirect('/hospitals');
 }));
 
