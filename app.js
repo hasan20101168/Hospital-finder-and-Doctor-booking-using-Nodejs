@@ -15,9 +15,10 @@ const ExpressError = require('./utils/ExpressError');
 const Hospital = require('./models/hospital');
 const Review = require('./models/review');*/
 const User = require('./models/user');
+
 const userRoutes = require('./routes/users');
-const hospitals = require('./routes/hospitals');
-const reviews = require('./routes/reviews');
+const hospitalRoutes = require('./routes/hospitals');
+const reviewRoutes = require('./routes/reviews');
 
 mongoose.connect('mongodb://127.0.0.1:27017/hospitalDB')
     .then(() => {
@@ -57,13 +58,15 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
 })
 
-app.use('/hospitals', hospitals);
-app.use('/hospitals/:id/reviews', reviews);
+app.use('/', userRoutes);
+app.use('/hospitals', hospitalRoutes);
+app.use('/hospitals/:id/reviews', reviewRoutes);
 
 app.get('/', (req, res) => {
     res.render('home');

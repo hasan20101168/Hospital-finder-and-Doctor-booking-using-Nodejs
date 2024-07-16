@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router();
 const {hospitalSchema} = require('../schemas.js');
 const catchAsync = require('../utils/catchAsync');
+const {isLoggedIn} = require('../middleware');
+
 const ExpressError = require('../utils/ExpressError');
 const Hospital = require('../models/hospital');
 
@@ -20,11 +22,11 @@ router.get('/', catchAsync(async (req, res) => {
     res.render('hospitals/index', {hospitals});
 }));
 
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
     res.render('hospitals/new');
 })
 
-router.post('/', validateHospital, catchAsync(async (req, res, next) => {
+router.post('/', isLoggedIn, validateHospital, catchAsync(async (req, res, next) => {
     const hospital = new Hospital(req.body.hospital);
     await hospital.save();
     req.flash('success', 'Successfully added a new hospital');
@@ -40,7 +42,7 @@ router.get('/:id', catchAsync(async (req, res) => {
     res.render('hospitals/show', {hospital});
 }));
 
-router.get('/:id/edit', catchAsync(async (req, res) => {
+router.get('/:id/edit', isLoggedIn,catchAsync(async (req, res) => {
     const hospital = await Hospital.findById(req.params.id)
     if (!hospital){
         req.flash('error', 'Cannot find the hospital!');
@@ -49,14 +51,14 @@ router.get('/:id/edit', catchAsync(async (req, res) => {
     res.render('hospitals/edit', {hospital});
 }));
 
-router.put('/:id', validateHospital,catchAsync(async (req, res) => {
+router.put('/:id', isLoggedIn,validateHospital,catchAsync(async (req, res) => {
     const {id} = req.params;
     const hospital = await Hospital.findByIdAndUpdate(id, {...req.body.hospital});
     req.flash('success', 'Successfully updated hospital!');
     res.redirect(`/hospitals/${hospital._id}`);
 }));
 
-router.delete('/:id', catchAsync(async (req, res) => {
+router.delete('/:id', isLoggedIn,catchAsync(async (req, res) => {
     const {id} = req.params;
     await Hospital.findByIdAndDelete(id);
     req.flash('success', 'Successfully deleted hospital!');
