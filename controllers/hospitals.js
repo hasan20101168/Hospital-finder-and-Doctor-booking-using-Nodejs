@@ -1,4 +1,7 @@
 const Hospital = require('../models/hospital');
+const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+const geocoder = mbxGeocoding({accessToken: mapBoxToken});
 
 module.exports.index = async (req, res) => {
 	const hospitals = await Hospital.find({});
@@ -10,9 +13,15 @@ module.exports.renderNewForm = (req, res) => {
 }
 
 module.exports.createHospital = async (req, res, next) => {
+    const geoData = await geocoder.forwardGeocode({
+        query: req.body.hospital.location,
+        limit: 1
+    }).send()
     const hospital = new Hospital(req.body.hospital);
+    hospital.geometry = geoData.body.features[0].geometry;
     hospital.author = req.user._id;
     await hospital.save();
+    //console.log(hospital);
     req.flash('success', 'Successfully added a new hospital');
     res.redirect(`/hospitals/${hospital._id}`)
 }

@@ -1,5 +1,7 @@
 <% layout('layouts/boilerplate') %>
 
+<div id="map" style="width: 100%; height: 500px;"></div>
+
 <h1>All hospitals</h1>
 <!--<div>
     <a href="/hospitals/new">Add Hospital</a>
@@ -25,3 +27,10 @@
     </div>
 <% } %>
 </ul>
+
+<script>
+    const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+    const hospitals = {features: <%- JSON.stringify(hospitals) %>}
+</script>
+
+<script src="/javascripts/clusterMap.js"></script>
