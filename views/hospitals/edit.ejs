@@ -3,7 +3,7 @@
 <div class="row">
     <h1 class="text-center"> Edit Hospital </h1>
     <div class="col-6 offset-3">
-        <form action="/hospitals/<%=hospital._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+        <form action="/hospitals/<%=hospital._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label" for="name">Name </label>
                 <input class="form-control" type="text" id="name" name="hospital[name]" value="<%=hospital.name%>" required>
@@ -18,19 +18,17 @@
                     Looks good!
                 </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label" for="image"> Image </label>
-                <input class="form-control" type="text" id="image" name="hospital[image]" value="<%=hospital.image%>" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-            </div>
+            
             <div class="mb-3">
                 <label class="form-label" for="description">Description </label>
                 <textarea class="form-control" id="description" name="hospital[description]" required><%=hospital.description%></textarea>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
+            </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Edit image</label>
+                <input class="form-control" type="file" id="image" name="image">
             </div>
             <div class="mb-3">
                 <button class="btn btn-info">Update Hospital</button>

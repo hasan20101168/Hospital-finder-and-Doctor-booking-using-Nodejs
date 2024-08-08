@@ -3,9 +3,13 @@
 
 <div class="row">
     <div class="col-6">
-        <div id='map' style='width: 400px; height: 300px;'></div>
+        <!-- <div id='map' style='width: 400px; height: 300px;'></div> -->
+
         <div class="card mb-3">
-            <img src="/images/<%=hospital.image%>" class="card-img-top" alt="...">
+            <% for (let img of hospital.images){ %>
+                <img src="<%=img.url%>" class="card-img-top" alt="">
+            <% } %>
+
             <div class="card-body">
               <h5 class="card-title"><%= hospital.name %></h5>
               <p class="card-text"><%= hospital.description %></p>
@@ -28,6 +32,7 @@
         </div>
     </div>
     <div class="col-6">
+        <div id='map'></div>
         <% if (currentUser){ %>
         <h2>Leave a Rating</h2>
         <form action="/hospitals/<%=hospital._id%>/reviews" method="POST" class="mb-3 validated-form" novalidate>

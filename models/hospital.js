@@ -6,7 +6,12 @@ const opts = {toJSON: {virtuals: true}};
 
 const HospitalSchema = new Schema({
     name: String,
-    image: String,
+    images: [
+        {
+            url: String,
+            filename: String
+        }
+    ],
     geometry: {
         type: {
             type: String,

@@ -19,6 +19,7 @@ module.exports.createHospital = async (req, res, next) => {
     }).send()
     const hospital = new Hospital(req.body.hospital);
     hospital.geometry = geoData.body.features[0].geometry;
+    hospital.images = req.files.map(f => ({url: f.path, filename: f.filename}));
     hospital.author = req.user._id;
     await hospital.save();
     //console.log(hospital);
@@ -54,6 +55,9 @@ module.exports.renderEditForm = async (req, res) => {
 module.exports.updateHospital = async (req, res) => {
     const {id} = req.params;
     const hospital = await Hospital.findByIdAndUpdate(id, {...req.body.hospital});
+    const imgs = req.files.map(f => ({url: f.path, filename: f.filename}));
+    hospital.images.push(...imgs);
+    await hospital.save();
     req.flash('success', 'Successfully updated hospital!');
     res.redirect(`/hospitals/${hospital._id}`);
 }
