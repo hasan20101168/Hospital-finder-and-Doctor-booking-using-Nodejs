@@ -1,0 +1,29 @@
+<% layout('layouts/boilerplate2') %>
+
+<h1>Doctors List</h1>
+<!--<div>
+    <a href="/hospitals/new">Add Hospital</a>
+</div>-->
+<ul>
+<% for (let doctor of hospital.doctors){ %>
+    <div class="card" mb-3>
+        <div class="row">
+            
+            <div class="col-md-4">
+                <img class="img-fluid" alt="" src="/images/<%=doctor.image%>"> 
+            </div>  
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title"><%=doctor.name%></h5>
+                    <p class="card-text"><%=doctor.department%></p>
+                    <p class="card-text">MBBS: <%=doctor.education%></p>
+                    <p class="card-text">Available days: <%=doctor.availabledays%></p>
+                    <p class="card-text">Time: <%=doctor.start_time%> - <%=doctor.end_time%></p>
+                    <a class="btn btn-success" href="">Doctor's Profile</a>
+                    <a class="btn btn-success" href="">Get Appointment</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<% } %>
+</ul>

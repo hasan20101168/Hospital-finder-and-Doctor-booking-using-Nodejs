@@ -1,58 +1,5 @@
 <% layout('layouts/boilerplate') %>
-<link rel="stylesheet" href="/stylesheets/stars.css">
 
-<div class="row">
-    <div class="col-6">
-        <!-- <div id='map' style='width: 400px; height: 300px;'></div> -->
-
-        <div class="card mb-3">
-            <% for (let img of hospital.images){ %>
-                <img src="<%=img.url%>" class="card-img-top" alt="">
-            <% } %>
-
-            <div class="card-body">
-              <h5 class="card-title"><%= hospital.name %></h5>
-              <p class="card-text"><%= hospital.description %></p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item text-muted"><%= hospital.location %></li>
-              <li class="list-group-item">Created by <%= hospital.author.username %></li>
-            </ul>
-            <% if (currentUser && hospital.author.equals(currentUser._id)){ %>
-            <div class="card-body">
-                <a class="card-link btn btn-info" href="/hospitals/<%=hospital._id%>/edit">Edit</a>
-                <form class="d-inline" action="/hospitals/<%=hospital._id%>?_method=DELETE" method="POST">
-                    <button class="btn btn-danger">Delete</button>
-                </form>
-            </div>
-            <% } %>
-            <!-- <div class="card-footer text-muted">
-                <a class="card-link btn btn-info" href="/doctors/new">Add Doctor Info</a>
-            </div> -->
-        </div>
-    </div>
-    <div class="col-6">
-        <!-- <div id='map'></div> -->
-    
-        <!-- Give ratings and review code here. -->
-        <h1>User Ratings & Reviews</h1>
-        <% for (let review of hospital.reviews) { %>
-        <div class="card mb-3">
-            <div class="card-body">
-                <h6 class="card-subtitle mb-2 text-muted"> By <%=review.author.username%></h6>
-                <p class="starability-result" data-rating="<%=review.rating%>">
-                  Rated: <%=review.rating%> stars
-                </p>
-                
-                <p class="card-text">Review: <%= review.body %></p>
-                <!-- Delete review code here -->
-            </div>
-        </div>
-        <% } %>
-    </div>
-</div>
-
-<% if (currentUser && hospital.author.equals(currentUser._id)){ %>
 <div class="row">
     <h1 class="text-center"> Add Doctor Info</h1>
     <div class="col-6 offset-3">
@@ -127,11 +74,3 @@
         </form>
     </div>
 </div>
-<% } %>
-
-<script>
-    const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
-    const hospital = <%- JSON.stringify(hospital) %>;
-</script>
-<script src="/javascripts/showPageMap.js"></script>
-

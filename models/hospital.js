@@ -34,6 +34,12 @@ const HospitalSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Review'
         }
+    ],
+    doctors: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Doctor'
+        }
     ]
 }, opts);
 

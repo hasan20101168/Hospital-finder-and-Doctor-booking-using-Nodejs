@@ -17,7 +17,9 @@
                 <h3 class="float-md-left mb-0">BookDoc</h3>
                 <nav class="nav nav-masthead justify-content-center float-md-right">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <% if(currentUser) { %>
                     <a class="nav-link" href="/hospitals">Hospitals</a>
+                    <% } %>
                     <% if(!currentUser) { %>
                     <a class="nav-link" href="/login">Login</a>
                     <a class="nav-link" href="/register">Register</a>
@@ -31,11 +33,15 @@
             <h1>BookDoc</h1>
             <p class="lead"> Welcome to BookDoc! <br> Find and book your preferred hospital. <br>
                 Feel free to share some of your own and comment on others!</p>
+                <% if(currentUser) { %>
             <a href="/hospitals" class="btn btn-lg btn-secondary font-weight-bold border-white bg-white">View
                 Hospitals</a>
+                <% } %>
         </main>
 
         <footer class="mt-auto text-white-50">
+            <p><a href="/uhospital" class="link-info link-offset-2 link-underline-opacity-25
+                 link-underline-opacity-100-hover">Login as Admin</a></p>
             <p>&copy; 2024 </p>
         </footer>
 

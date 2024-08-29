@@ -1,6 +1,6 @@
-<% layout('layouts/boilerplate') %>
+<% layout('layouts/boilerplate2') %>
 
-<!-- <div id="cluster-map"></div> -->
+<div id="cluster-map"></div>
 
 <h1>All hospitals</h1>
 <!--<div>
@@ -21,7 +21,7 @@
                     <p class="card-text">
                         <small class="text-muted"><%=hospital.location%></small>
                     </p>
-                    <a class="btn btn-primary" href="/hospitals/<%=hospital._id%>">View <%=hospital.name%></a>
+                    <a class="btn btn-primary" href="/uhospitals/<%=hospital._id%>">View <%=hospital.name%></a>
                 </div>
             </div>
         </div>
@@ -35,4 +35,3 @@
 </script>
 
 <script src="/javascripts/clusterMap.js"></script>
-
