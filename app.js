@@ -105,6 +105,10 @@ app.get('/uhospitals/:id/doctors', async(req, res) => {
     res.render('admins/doctors', {hospital});
 })
 
+app.get('/appointment', async(req, res) => {
+    res.render('admins/appointment');
+})
+
 
 app.post('/hospitals/:id/doctors', catchAsync(async(req, res) => {
     const hospital = await Hospital.findById(req.params.id);

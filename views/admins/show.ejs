@@ -16,8 +16,9 @@
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item text-muted"><%= hospital.location %></li>
-              <p><a href="/uhospitals/<%=hospital._id%>/doctors" class="link-info link-offset-2 link-underline-opacity-25 
-                link-underline-opacity-100-hover">Doctors List</a></p>
+              <!-- <p><a href="/uhospitals/<%=hospital._id%>/doctors" class="link-info link-offset-2 link-underline-opacity-25 
+                link-underline-opacity-100-hover">Doctors List</a></p> -->
+              <a class="btn btn-info col-md-3" href="/uhospitals/<%=hospital._id%>/doctors">Doctors List</a>
             </ul>
             
             <!-- <div class="card-footer text-muted">
